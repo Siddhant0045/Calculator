@@ -2,7 +2,7 @@
     display: grid;
     grid-template-columns: 50px 50px 50px 50px ;
     gap: 10px;
-    margin: 0px 20px 20px 20px;
+    margin: 0px 15px 20px 15px;
 }
 
 button{
@@ -55,15 +55,19 @@ body{
     height: 100vh;
 }
 
-output{
+p{
     display: block;
     height: 50px;
     color: white;
     text-align: right;
     font-size: 40px;
     padding-right: 35px;
-    margin-bottom:15px;
+    margin: 0px 0px 15px 0px;
 }
 
-
-
+img{
+    position: fixed;
+    z-index: -1;
+    place-self: center;
+    margin-left: 1px;
+}
