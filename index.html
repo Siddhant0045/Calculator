@@ -3,41 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Calculator</title>
     <link href="style.css" rel="stylesheet">
 </head>
 <body>
-    <div class="main">
-        <img src="./1250536c635fd688d1a0c1065dd9a246.jpg">
-        <div class="calculator">
-        <div class="display">
-            <p></p>
-            <p id="outputscreen">0</p>
+    <div class="mainbody">
+        <div class="typedcontent">
+            <div></div>
+            <div id="prevequation"></div>
+            <div id="typehere"></div>
         </div>
         <div class="allbuttons">
-            <button id="allClearBtn" class="white">AC</button>
-            <button id="clearBtn" class="white">C</button>
-            <button id="percentageBtn" class="white">%</button>
-            <button id="divide" class="gold" data-operators>/</button>
-            <button id="digit-7" data-numbers>7</button>
-            <button id="digit-8" data-numbers>8</button>
-            <button id="digit-9" data-numbers>9</button>
-            <button id="multiplication" class="gold" data-operators>x</button>
-            <button id="digit-4" data-numbers>4</button>
-            <button id="digit-5" data-numbers>5</button>
-            <button id="digit-6" data-numbers>6</button>
-            <button id="subtraction" class="gold" data-operators>-</button>
-            <button id="digit-1" data-numbers>1</button>
-            <button id="digit-2" data-numbers>2</button>
-            <button id="digit-3" data-numbers>3</button>
-            <button id="addition" class="gold" data-operators>+</button>
-            <button id="digit-0" style="grid-column: span 2; border-radius: 50px;" data-numbers>0</button>
-            <button id="pointBtn">.</button>
-            <button id="equal" class="gold">=</button>
+            <div id="AC" class="inputbtn specialbtn">AC</div>
+            <div id="changesign" class="inputbtn specialbtn">-/+</div>
+            <div id="percent" class="inputbtn specialbtn">%</div>
+            <div id="division" class="inputbtn operatorbtn">/</div>
+            <div class="number inputbtn">7</div>
+            <div class="number inputbtn">8</div>
+            <div class="number inputbtn">9</div>
+            <div class="number mul inputbtn operatorbtn">x<svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="white" class="bi bi-x" viewBox="0 0 16 16">
+                <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708"/>
+              </svg></div>
+            <div class="number inputbtn">4</div>
+            <div class="number inputbtn">5</div>
+            <div class="number inputbtn">6</div>
+            <div class="number inputbtn operatorbtn">-</div>
+            <div class="number inputbtn">1</div>
+            <div class="number inputbtn">2</div>
+            <div class="number inputbtn">3</div>
+            <div class="number inputbtn operatorbtn">+</div>
+            <div class="zerobtn inputbtn number">0</div>
+            <div class="number inputbtn">.</div>
+            <div class="number inputbtn equalbtn">=</div>
         </div>
-        </div> 
     </div>
-    
+
     <script src="script.js"></script>
 </body>
 </html>

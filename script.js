@@ -1,93 +1,81 @@
-const numberBtns = document.querySelectorAll('[data-numbers]')
-const operatorsBtns = document.querySelectorAll('[data-operators]')
-const outputscreen = document.getElementById('outputscreen')
-const allclearBtn = document.getElementById('allClearBtn')
-const clearBtn = document.getElementById('clearBtn')
-const percentageBtn = document.getElementById('percentageBtn')
-const pointBtn = document.getElementById('pointBtn')
-const equalBtn = document.getElementById('equal')
+document.addEventListener("DOMContentLoaded", () => {
+    const typeHere = document.getElementById("typehere");
+    const prevEquation = document.getElementById("prevequation");
+    const buttons = document.querySelectorAll(".inputbtn");
 
-numberBtns.forEach((button) => button.addEventListener('click',() => appendNumber(button.textContent)));
-operatorsBtns.forEach((button) => button.addEventListener('click',() => setOperation(button.textContent)));
-equalBtn.addEventListener("click",showanswer);
-// allclearBtn.addEventListener('click',allclearfunc);
-// clearBtn.addEventListener('click',clearfunc);
-// percentageBtn.addEventListener('click',percentfunc)
-// pointBtn.addEventListener('click',pointfunc)
+    let currentInput = "";
+    let previousInput = "";
+    let operator = "";
 
-let currentAns = '';
-let currentInput = '';
-let currentOperator = null;
-let previousInput = '';
-let shouldreset = false
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            const value = button.textContent.trim();
 
-function appendNumber(number){
-    currentInput += number;
-    if(currentOperator == ''){
-        outputscreen.textContent = currentInput;
-        shouldreset = false
+            if (button.id === "AC") {
+                currentInput = "";
+                previousInput = "";
+                operator = "";
+                updateDisplay();
+            } 
+
+            else if (button.id === "changesign") {
+                currentInput = currentInput.startsWith("-") ? currentInput.slice(1) : "-" + currentInput;
+                updateDisplay();
+            } 
+
+            else if (button.id === "percent") {
+                currentInput = (parseFloat(currentInput) / 100).toString();
+                updateDisplay();
+            } 
+
+            else if (button.classList.contains("operatorbtn")) {
+                if (currentInput) {
+                    previousInput = currentInput;
+                    currentInput = "";
+                    operator = value;
+                    prevEquation.textContent = `${previousInput} ${operator}`;
+                    updateDisplay();
+                }
+            } 
+
+            else if (button.classList.contains("equalbtn")) {
+                if (previousInput && currentInput && operator) {
+                    currentInput = calculate(previousInput, currentInput, operator).toString();
+                    previousInput = "";
+                    operator = "";
+                    updateDisplay();
+                }
+            } 
+
+            else {
+                if (value === "." && currentInput.includes(".")) return;
+                currentInput += value;
+                updateDisplay();
+            }
+        });
+    });
+
+    function updateDisplay() {
+        typeHere.textContent = currentInput || "0";
+        prevEquation.textContent = previousInput ? `${previousInput} ${operator}` : "";
     }
-    else{
-        outputscreen.textContent = currentInput;
-        shouldreset = false
-        evaluate();
+
+    function calculate(a, b, operator) {
+        const num1 = parseFloat(a);
+        const num2 = parseFloat(b);
+        if (isNaN(num1) || isNaN(num2)) return "";
+
+        switch (operator) {
+            case "+":
+                return num1 + num2;
+            case "-":
+                return num1 - num2;
+            case "/":
+                return num1 / num2;
+            case "x":
+                return num1 * num2;
+            default:
+                return "";
+        }
     }
-}
-
-function setOperation(operation){
-    if(currentOperator !== null){
-        currentOperator = null
-        setOperation(operation)
-    }
-    currentOperator = operation;
-    previousInput = currentInput;
-    currentInput = '';
-    shouldreset = true
-}
-
-function evaluate(){
-    if (currentOperator === null || shouldreset) return;
-    const result = operate(currentOperator,parseInt(previousInput),parseInt(currentInput))
-    if(result !== null){
-        currentAns = result
-        previousInput = '';
-        currentOperator = '';
-    }
-    else{
-        outputscreen.textContent = "Error"
-    }
-}
- 
-function operate(operator , a , b){
-    if(operator == '+')
-        return add(a,b)
-    else if(operator == '-')
-        return sub(a,b)
-    else if(operator == 'x')
-        return mul(a,b)
-    else if(operator == '/')
-        return div(a,b)
-    else
-        return "Error";
-}
-
-function add(a,b){
-    return a+b
-}
-
-function sub(a,b){
-    return a-b
-}
-
-function mul(a,b){
-    return a*b
-}
-
-function div(a,b){
-    if(b == 0) return "Error";
-    return a/b
-}
-
-function showanswer(){
-    outputscreen.textContent = currentAns.toString();
-}
+});
